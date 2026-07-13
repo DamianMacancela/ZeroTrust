@@ -12,6 +12,7 @@ const rateLimitMap = new Map<string, { count: number; reset: number }>();
 const RATE_LIMITS: Record<string, { max: number; windowMs: number }> = {
   '/api/webhooks/stripe': { max: 100,  windowMs: 60_000 },
   '/api/audit':           { max: 200,  windowMs: 60_000 },
+  '/api/process-document':{ max: 10,   windowMs: 60_000 }, // Strict limit against DDoS / Abuse
   '/':                    { max: 60,   windowMs: 60_000 },
   'default':              { max: 120,  windowMs: 60_000 },
 };
@@ -42,11 +43,11 @@ function checkRateLimit(ip: string, pathname: string): boolean {
 // OWASP A03 (XSS) | SOC 2 CC7.1
 const CSP = [
   "default-src 'self'",
-  "script-src 'self' 'unsafe-eval' 'unsafe-inline' https://js.stripe.com",
+  "script-src 'self' 'unsafe-eval' 'unsafe-inline' https://js.stripe.com https://cdnjs.cloudflare.com https://unpkg.com",
   "style-src 'self' 'unsafe-inline'",
   "img-src 'self' data: blob:",
   "font-src 'self'",
-  "connect-src 'self' https://api.stripe.com https://api.anthropic.com",
+  "connect-src 'self' https://api.stripe.com https://api.anthropic.com https://cdnjs.cloudflare.com https://unpkg.com",
   "frame-src https://js.stripe.com https://hooks.stripe.com",
   "worker-src 'self' blob:",      // Requerido para Web Workers
   "object-src 'none'",

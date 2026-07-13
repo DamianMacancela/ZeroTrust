@@ -1,4 +1,69 @@
-﻿import { NextRequest, NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
+
+export async function GET() {
+  const openApiSpec = {
+    openapi: "3.0.0",
+    info: {
+      title: "ZeroTrust Tech - Redaction API",
+      description: "API corporativa para la ofuscación de documentos (Zero-Data RAM).",
+      version: "1.0.0"
+    },
+    paths: {
+      "/api/v1/redact": {
+        post: {
+          summary: "Ofuscar documento",
+          description: "Envía un documento para ser procesado por el motor NLP (RAM-Only).",
+          security: [{ BearerAuth: [] }],
+          requestBody: {
+            required: true,
+            content: {
+              "multipart/form-data": {
+                schema: {
+                  type: "object",
+                  properties: {
+                    document: {
+                      type: "string",
+                      format: "binary",
+                      description: "Archivo PDF/DOCX a procesar."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          responses: {
+            "200": {
+              description: "Proceso completado",
+              content: {
+                "application/json": {
+                  schema: {
+                    type: "object",
+                    properties: {
+                      success: { type: "boolean" },
+                      message: { type: "string" },
+                      audit_data: { type: "object" },
+                      download_url: { type: "string" }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    components: {
+      securitySchemes: {
+        BearerAuth: {
+          type: "http",
+          scheme: "bearer"
+        }
+      }
+    }
+  };
+
+  return NextResponse.json(openApiSpec);
+}
 
 export async function POST(req: NextRequest) {
   // 1. Validación de API Key (Autenticación B2B)

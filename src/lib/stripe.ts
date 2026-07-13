@@ -1,10 +1,13 @@
 ﻿import Stripe from 'stripe';
 
-if (!process.env.STRIPE_SECRET_KEY) {
-    console.warn("ADVERTENCIA: STRIPE_SECRET_KEY no está definido en .env.local");
+// Lazy factory -- nunca instancia en scope global
+export function getStripe(): Stripe {
+  const key = process.env.STRIPE_SECRET_KEY;
+  if (!key || !key.startsWith('sk_')) {
+    throw new Error('STRIPE_SECRET_KEY invalida o no configurada');
+  }
+  return new Stripe(key, {
+    apiVersion: '2026-06-24.dahlia',
+    appInfo: { name: 'ZeroTrust Tech', version: '1.0.0' },
+  });
 }
-
-export const stripe = new Stripe(process.env.STRIPE_SECRET_KEY || 'sk_test_placeholder', {
-  apiVersion: '2024-04-10',
-  typescript: true,
-});

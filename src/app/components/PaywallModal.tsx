@@ -1,6 +1,6 @@
-﻿'use client';
+'use client';
 import { useTransition, useState } from 'react';
-import { createCheckoutSession } from '@/app/actions/stripe-checkout';
+import { createCheckoutSession } from '@/app/actions/lemonsqueezy-checkout';
 import { Zap, X, Fingerprint, Lock, AlertTriangle } from 'lucide-react';
 
 interface Props { onClose: () => void; }
