@@ -24,7 +24,7 @@ export default function LegalTechLanding() {
 
   useEffect(() => {
     if (localStorage.getItem('grc_free_trial_used')) {
-      // BYPASS TEMPORAL: setHasUsedTrial(true);
+      setHasUsedTrial(true);
     }
     // Leer parametros de pago
     const query = new URLSearchParams(window.location.search);
@@ -93,13 +93,13 @@ export default function LegalTechLanding() {
       });
 
       if (response.status === 403) {
-        // BYPASS TEMPORAL:
-        // setHasUsedTrial(true);
-        // localStorage.setItem('grc_free_trial_used', 'true');
-        // setTrialStatus('used');
-        // setErrorMessage('Limite de prueba gratuita alcanzado. Actualice a Enterprise.');
-        // if (e.target) e.target.value = '';
-        // return;
+        setHasUsedTrial(true);
+        localStorage.setItem('grc_free_trial_used', 'true');
+        setTrialStatus('used');
+        const data = await response.json().catch(() => ({}));
+        setErrorMessage(data.error || 'Limite de prueba gratuita alcanzado. Actualice a Enterprise.');
+        if (e.target) e.target.value = '';
+        return;
       }
 
       if (!response.ok) {
@@ -139,9 +139,8 @@ export default function LegalTechLanding() {
             }, 1000);
           }
 
-          // BYPASS TEMPORAL:
-          // setHasUsedTrial(true);
-          // localStorage.setItem('grc_free_trial_used', 'true');
+          setHasUsedTrial(true);
+          localStorage.setItem('grc_free_trial_used', 'true');
           setStats({ words: 0, redacted: 0 });
           setTrialStatus('success');
           setProcessingStage('');

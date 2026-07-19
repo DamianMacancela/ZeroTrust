@@ -1,13 +1,21 @@
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 
 export const runtime = 'nodejs';
 
-export async function GET() {
+// Protected debug endpoint — requires admin token
+export async function GET(req: NextRequest) {
+  const authHeader = req.headers.get('authorization');
+  const expectedToken = process.env.AUDIT_INTERNAL_SECRET;
+
+  if (!expectedToken || authHeader !== `Bearer ${expectedToken}`) {
+    return NextResponse.json({ error: 'No autorizado' }, { status: 401 });
+  }
+
   return NextResponse.json({
-    url: !!process.env.NEXT_PUBLIC_SUPABASE_URL,
-    url_val: process.env.NEXT_PUBLIC_SUPABASE_URL?.substring(0, 10),
-    key: !!process.env.SUPABASE_SERVICE_ROLE_KEY,
-    key_val_len: process.env.SUPABASE_SERVICE_ROLE_KEY?.length || 0,
-    anon: !!process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
+    stripe_configured: !!process.env.STRIPE_SECRET_KEY,
+    stripe_price_configured: !!process.env.STRIPE_PRICE_ID_PRO,
+    supabase_url_configured: !!process.env.NEXT_PUBLIC_SUPABASE_URL,
+    audit_salt_configured: !!process.env.NEXT_PUBLIC_AUDIT_SALT,
+    app_url: process.env.NEXT_PUBLIC_APP_URL || 'not set',
   });
 }
