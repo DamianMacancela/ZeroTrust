@@ -431,13 +431,13 @@ export default function LegalTechLanding() {
                       {isProActive && errorMessage && <p className="text-[12px] mb-4 text-center font-bold text-red-400 bg-red-500/10 py-2 rounded-lg">{errorMessage}</p>}
                     </div>
                   ) : (
-                    <form action="/api/checkout/enterprise" method="POST" className="mt-auto">
-                      <button type="submit" className="w-full bg-[#0EA5E9] hover:bg-[#0284C7] text-white py-4 px-4 rounded-xl font-black transition-all flex justify-center items-center gap-2 shadow-lg hover:shadow-xl">
+                    <div className="mt-auto">
+                      <a href="/api/checkout/enterprise" className="w-full bg-[#0EA5E9] hover:bg-[#0284C7] text-white py-4 px-4 rounded-xl font-black transition-all flex justify-center items-center gap-2 shadow-lg hover:shadow-xl no-underline">
                         <Database className="h-5 w-5" />
                         Adquirir Licencia Corporativa
-                      </button>
+                      </a>
                       <p className="text-[11px] text-slate-500 text-center mt-5 font-bold tracking-wide">Contratación B2B respaldada por Stripe (Merchant of Record Institucional).</p>
-                    </form>
+                    </div>
                   )}
               </div>
 

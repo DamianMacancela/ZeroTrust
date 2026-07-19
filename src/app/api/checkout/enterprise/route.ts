@@ -1,12 +1,18 @@
-﻿import { NextRequest, NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 import Stripe from 'stripe';
 
-export async function POST(req: NextRequest) {
+export const runtime = 'nodejs';
+
+// Use GET so a simple <a href> or window.location works — no form, no CSRF
+export async function GET(req: NextRequest) {
   const STRIPE_SECRET_KEY = process.env.STRIPE_SECRET_KEY;
   const STRIPE_PRICE_ID = process.env.STRIPE_PRICE_ID_PRO;
 
   if (!STRIPE_SECRET_KEY || !STRIPE_PRICE_ID) {
-    console.error('[CHECKOUT_ENTERPRISE] Variables de Stripe no configuradas en Vercel');
+    console.error('[CHECKOUT] STRIPE keys missing:', {
+      hasSecret: !!STRIPE_SECRET_KEY,
+      hasPrice: !!STRIPE_PRICE_ID,
+    });
     return NextResponse.redirect(new URL('/?payment=config_error', req.url), 303);
   }
 
@@ -16,7 +22,6 @@ export async function POST(req: NextRequest) {
 
   try {
     const origin =
-      req.headers.get('origin') ||
       process.env.NEXT_PUBLIC_APP_URL ||
       req.nextUrl.origin;
 
@@ -28,7 +33,7 @@ export async function POST(req: NextRequest) {
       cancel_url: origin + '/?payment=cancelled',
       metadata: {
         product: 'ZeroTrust Tech Enterprise',
-        source: 'landing_form',
+        source: 'landing',
       },
     });
 
@@ -40,7 +45,7 @@ export async function POST(req: NextRequest) {
 
   } catch (error: unknown) {
     const msg = error instanceof Error ? error.message : 'Error desconocido';
-    console.error('[CHECKOUT_ENTERPRISE_ERROR]:', msg);
-    return NextResponse.redirect(new URL('/?payment=cancelled', req.url), 303);
+    console.error('[CHECKOUT_ERROR]:', msg);
+    return NextResponse.redirect(new URL('/?payment=error', req.url), 303);
   }
 }
