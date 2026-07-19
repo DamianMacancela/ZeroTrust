@@ -435,7 +435,7 @@ export default function LegalTechLanding() {
                         <Database className="h-5 w-5" />
                         Adquirir Licencia Corporativa
                       </a>
-                      <p className="text-[11px] text-slate-500 text-center mt-5 font-bold tracking-wide">Contratación B2B respaldada por Stripe (Merchant of Record Institucional).</p>
+                      <p className="text-[11px] text-slate-500 text-center mt-5 font-bold tracking-wide">Contratación B2B respaldada por Lemon Squeezy (Merchant of Record Institucional).</p>
                     </div>
                   )}
               </div>
@@ -538,7 +538,7 @@ export default function LegalTechLanding() {
           </div>
           <div className="border-t border-slate-100 mt-10 pt-6 flex flex-col sm:flex-row items-center justify-between gap-2">
             <p className="text-[11px] text-slate-400 font-medium">© 2027 ZeroTrust Tech. Todos los derechos reservados.</p>
-            <p className="text-[11px] text-slate-400 font-medium">Pagos procesados por Stripe (Merchant of Record) · Cumplimiento B2B Global</p>
+            <p className="text-[11px] text-slate-400 font-medium">Pagos procesados por Lemon Squeezy (Merchant of Record) · Cumplimiento B2B Global</p>
           </div>
         </div>
       </footer>
