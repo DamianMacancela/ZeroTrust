@@ -59,13 +59,11 @@ export async function verifyAndConsumeTrial(): Promise<{
     return { success: true };
 
   } catch (error) {
-    console.error(
-      '[trial-manager] Excepcion:',
-      error instanceof Error ? error.message : 'unknown'
-    );
+    const errorMsg = error instanceof Error ? error.message : 'unknown';
+    console.error('[trial-manager] Excepcion:', errorMsg);
     return {
       success: false,
-      error: 'Error de validacion. El motor ha abortado por seguridad.',
+      error: `DEBUG ERROR: ${errorMsg}`,
     };
   }
 }
