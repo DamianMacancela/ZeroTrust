@@ -74,7 +74,7 @@ const SECURITY_HEADERS: Record<string, string> = {
 
 // ── CSRF Protection ──────────────────────────────────────────────────────────
 // OWASP A01 | Excluye webhooks Stripe (verificados por HMAC)
-const CSRF_EXEMPT = ['/api/webhooks/stripe'];
+const CSRF_EXEMPT = ['/api/webhooks/stripe', '/api/checkout'];
 
 function validateCsrf(request: NextRequest): boolean {
   if (request.method === 'GET' || request.method === 'HEAD') return true;
