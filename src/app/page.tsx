@@ -6,7 +6,6 @@ import {
   ShieldCheck, Lock, Image as ImageIcon, CheckCircle, AlertTriangle, 
   Archive, Database, Server, Fingerprint, FileCode, Loader2
 } from 'lucide-react';
-import { createCheckoutSession } from './actions/lemonsqueezy-checkout';
 import { downloadAuditReport } from '../components/AuditReportGenerator';
 
 export default function LegalTechLanding() {
@@ -368,17 +367,7 @@ export default function LegalTechLanding() {
                 <div>
                   <div className="inline-block px-3 py-1 bg-[#1E293B] text-[#38BDF8] text-[10px] font-black uppercase tracking-[0.15em] rounded-full mb-6 border border-[#334155]">Despliegue Institucional</div>
                   <h3 className="text-3xl font-black text-white mb-3 tracking-tight">Licencia Enterprise</h3>
-                  
-                  {/* ALERTA DE MODO DE PRUEBA (Ocultar automáticamente en producción real si la variable no está presente) */}
-                  {process.env.NEXT_PUBLIC_LEMONSQUEEZY_TEST_MODE === 'true' && (
-                    <div className="mb-4 p-3 bg-amber-500/10 border border-amber-500/30 rounded-lg flex gap-2">
-                      <AlertTriangle className="h-5 w-5 text-amber-500 shrink-0" />
-                      <div>
-                        <p className="text-xs font-bold text-amber-500">MODO DE PRUEBA (TEST ENVIRONMENT)</p>
-                        <p className="text-[11px] text-amber-400/80 mt-1">Usa la tarjeta de prueba generica de Lemon Squeezy.</p>
-                      </div>
-                    </div>
-                  )}
+
 
                   <p className="text-slate-400 mb-8 font-medium text-sm leading-relaxed">Plataforma integral para departamentos de Compliance y Legal. Contrato de Procesamiento de Datos (DPA) garantizado como Encargados de Tratamiento.</p>
                   
@@ -442,17 +431,12 @@ export default function LegalTechLanding() {
                       {isProActive && errorMessage && <p className="text-[12px] mb-4 text-center font-bold text-red-400 bg-red-500/10 py-2 rounded-lg">{errorMessage}</p>}
                     </div>
                   ) : (
-                    <form action={async () => {
-                      const res = await createCheckoutSession();
-                      if (res?.error) {
-                        setErrorMessage(res.error);
-                      }
-                    }} className="mt-auto">
+                    <form action="/api/checkout/enterprise" method="POST" className="mt-auto">
                       <button type="submit" className="w-full bg-[#0EA5E9] hover:bg-[#0284C7] text-white py-4 px-4 rounded-xl font-black transition-all flex justify-center items-center gap-2 shadow-lg hover:shadow-xl">
                         <Database className="h-5 w-5" />
                         Adquirir Licencia Corporativa
                       </button>
-                      <p className="text-[11px] text-slate-500 text-center mt-5 font-bold tracking-wide">Contratación B2B respaldada por Merchant of Record institucional.</p>
+                      <p className="text-[11px] text-slate-500 text-center mt-5 font-bold tracking-wide">Contratación B2B respaldada por Stripe (Merchant of Record Institucional).</p>
                     </form>
                   )}
               </div>
@@ -555,7 +539,7 @@ export default function LegalTechLanding() {
           </div>
           <div className="border-t border-slate-100 mt-10 pt-6 flex flex-col sm:flex-row items-center justify-between gap-2">
             <p className="text-[11px] text-slate-400 font-medium">© 2027 ZeroTrust Tech. Todos los derechos reservados.</p>
-            <p className="text-[11px] text-slate-400 font-medium">Pagos procesados por Lemon Squeezy (Merchant of Record) · Cumplimiento B2B Global</p>
+            <p className="text-[11px] text-slate-400 font-medium">Pagos procesados por Stripe (Merchant of Record) · Cumplimiento B2B Global</p>
           </div>
         </div>
       </footer>
