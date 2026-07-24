@@ -31,6 +31,9 @@ export const metadata: Metadata = {
       'max-snippet': -1,
     },
   },
+  verification: {
+    google: "qWKebsXjMpuXjCmGNgvyFGmjOo3oFtBeJIhf5Yl2m3o",
+  },
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
