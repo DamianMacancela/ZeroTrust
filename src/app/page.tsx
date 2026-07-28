@@ -4,7 +4,7 @@ import { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
   ShieldCheck, Lock, Image as ImageIcon, CheckCircle, AlertTriangle, 
-  Archive, Database, Server, Fingerprint, FileCode, Loader2
+  Archive, Database, Server, Fingerprint, FileCode, Loader2, MessageCircle
 } from 'lucide-react';
 import { downloadAuditReport } from '../components/AuditReportGenerator';
 
@@ -430,12 +430,21 @@ export default function LegalTechLanding() {
                       {isProActive && errorMessage && <p className="text-[12px] mb-4 text-center font-bold text-red-400 bg-red-500/10 py-2 rounded-lg">{errorMessage}</p>}
                     </div>
                   ) : (
-                    <div className="mt-auto">
-                      <a href="/api/checkout/enterprise" className="w-full bg-[#0EA5E9] hover:bg-[#0284C7] text-white py-4 px-4 rounded-xl font-black transition-all flex justify-center items-center gap-2 shadow-lg hover:shadow-xl no-underline">
-                        <Database className="h-5 w-5" />
-                        Adquirir Licencia Corporativa
+                    <div className="mt-auto space-y-3">
+                      <a href="/api/checkout/enterprise" className="w-full bg-[#0EA5E9] hover:bg-[#0284C7] text-white py-3.5 px-4 rounded-xl font-black transition-all flex justify-center items-center gap-2 shadow-lg hover:shadow-xl no-underline text-sm">
+                        <Database className="h-5 w-5 shrink-0" />
+                        <span>Comprar en Línea (Tarjeta / PayPal)</span>
                       </a>
-                      <p className="text-[11px] text-slate-500 text-center mt-5 font-bold tracking-wide">Contratación B2B respaldada por Lemon Squeezy (Merchant of Record Institucional).</p>
+                      <a 
+                        href={`https://wa.me/${process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '593999999999'}?text=Hola,%20deseo%20contratar%20la%20Licencia%20Enterprise%20de%20ZeroTrust%20Redact%20para%20mi%20empresa.`} 
+                        target="_blank" 
+                        rel="noopener noreferrer" 
+                        className="w-full bg-[#10B981]/15 hover:bg-[#10B981]/25 text-[#34D399] border border-[#10B981]/30 py-3.5 px-4 rounded-xl font-black transition-all flex justify-center items-center gap-2 shadow-sm no-underline text-sm"
+                      >
+                        <MessageCircle className="h-5 w-5 text-[#34D399] shrink-0" />
+                        <span>Atención B2B por WhatsApp (Facturación / Transferencia)</span>
+                      </a>
+                      <p className="text-[11px] text-slate-500 text-center mt-3 font-bold tracking-wide">Pago instantáneo seguro · Cumplimiento legal LOPD & GDPR para empresas.</p>
                     </div>
                   )}
               </div>

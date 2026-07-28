@@ -5,6 +5,11 @@ export const runtime = 'nodejs';
 
 // Use GET so a simple <a href> or window.location works
 export async function GET(req: NextRequest) {
+  // Bypass directo a Gumroad / PayPhone si se define para ventas inmediatas sin esperar revisiones
+  if (process.env.DIRECT_CHECKOUT_URL) {
+    return NextResponse.redirect(process.env.DIRECT_CHECKOUT_URL, 303);
+  }
+
   const apiKey = process.env.LEMONSQUEEZY_API_KEY;
   const storeId = process.env.LEMONSQUEEZY_STORE_ID;
   const variantId = process.env.LEMONSQUEEZY_VARIANT_ID;
@@ -33,7 +38,8 @@ export async function GET(req: NextRequest) {
           source: 'landing',
         }
       },
-      testMode: process.env.VERCEL_ENV !== 'production'
+      // Force test mode if the store is pending approval, or if it's not production
+      testMode: process.env.LEMONSQUEEZY_TEST_MODE === 'true' || process.env.VERCEL_ENV !== 'production'
     });
 
     if (error) {
