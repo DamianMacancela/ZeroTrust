@@ -1,61 +1,38 @@
+/**
+ * Checkout Enterprise — Endpoint unificado (Strategy Pattern).
+ * 
+ * Selecciona automáticamente la pasarela activa según ACTIVE_PAYMENT_GATEWAY.
+ * Soporta bypass directo via DIRECT_CHECKOUT_URL para gateways externos (Gumroad, PayPhone).
+ */
+
 import { NextRequest, NextResponse } from 'next/server';
-import { createCheckout, lemonSqueezySetup } from '@lemonsqueezy/lemonsqueezy.js';
+import { PaymentGatewayFactory } from '@/lib/payments/factory';
 
 export const runtime = 'nodejs';
 
 // Use GET so a simple <a href> or window.location works
 export async function GET(req: NextRequest) {
-  // Bypass directo a Gumroad / PayPhone si se define para ventas inmediatas sin esperar revisiones
+  // 1. Bypass directo a URL externa si se define (Gumroad, PayPhone, etc.)
   if (process.env.DIRECT_CHECKOUT_URL) {
     return NextResponse.redirect(process.env.DIRECT_CHECKOUT_URL, 303);
   }
 
-  const apiKey = process.env.LEMONSQUEEZY_API_KEY;
-  const storeId = process.env.LEMONSQUEEZY_STORE_ID;
-  const variantId = process.env.LEMONSQUEEZY_VARIANT_ID;
-
-  if (!apiKey || !storeId || !variantId) {
-    console.error('[CHECKOUT] Lemon Squeezy keys missing:', {
-      hasApi: !!apiKey,
-      hasStore: !!storeId,
-      hasVariant: !!variantId,
-    });
-    return NextResponse.redirect(new URL('/?payment=config_error', req.url), 303);
-  }
-
-  lemonSqueezySetup({ apiKey });
-
+  // 2. Crear sesión de checkout via Strategy Pattern
   try {
-    const { data, error } = await createCheckout(storeId, variantId, {
-      checkoutOptions: {
-        embed: false,
-        media: false,
-        logo: true,
-      },
-      checkoutData: {
-        custom: {
-          product: 'ZeroTrust Tech Enterprise',
-          source: 'landing',
-        }
-      },
-      // Force test mode if the store is pending approval, or if it's not production
-      testMode: process.env.LEMONSQUEEZY_TEST_MODE === 'true' || process.env.VERCEL_ENV !== 'production'
+    const gateway = PaymentGatewayFactory.create();
+    const appUrl = process.env.NEXT_PUBLIC_APP_URL || new URL('/', req.url).toString();
+
+    const { redirectUrl } = await gateway.createCheckoutSession({
+      successUrl: `${appUrl}/?payment=success`,
+      cancelUrl: `${appUrl}/?payment=cancelled`,
+      customData: { source: 'landing' },
     });
 
-    if (error) {
-      console.error('[CHECKOUT_LEMONSQUEEZY_API_ERROR]:', error);
-      throw new Error(error.message);
-    }
-
-    if (!data?.data?.attributes?.url) {
-      throw new Error('Lemon Squeezy no devolvio URL de sesion');
-    }
-
-    return NextResponse.redirect(data.data.attributes.url, 303);
+    return NextResponse.redirect(redirectUrl, 303);
 
   } catch (error: unknown) {
     const msg = error instanceof Error ? error.message : 'Error desconocido';
-    console.error('[CHECKOUT_ERROR]:', msg);
+    console.error(`[CHECKOUT_ERROR][${PaymentGatewayFactory.getActiveType()}]:`, msg);
     return NextResponse.redirect(new URL('/?payment=error', req.url), 303);
   }
 }

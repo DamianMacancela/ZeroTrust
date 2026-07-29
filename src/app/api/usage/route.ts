@@ -1,4 +1,4 @@
-﻿import { NextRequest, NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 import { cookies } from 'next/headers';
 import { createHmac } from 'crypto';
 
@@ -29,7 +29,10 @@ async function getValidatedCount() {
 
 export async function GET() {
   const count = await getValidatedCount();
-  return NextResponse.json({ count, allowed: count < FREE_LIMIT });
+  // subscriptionActive se actualizará a true cuando el webhook procese un pago real
+  // Por ahora, solo verificamos trial usage. En producción completa,
+  // esto consultaría Supabase para verificar users.role === 'ENTERPRISE'.
+  return NextResponse.json({ count, allowed: count < FREE_LIMIT, subscriptionActive: false });
 }
 
 export async function POST() {

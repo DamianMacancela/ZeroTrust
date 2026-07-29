@@ -10,11 +10,12 @@ import type { NextRequest } from 'next/server';
 const rateLimitMap = new Map<string, { count: number; reset: number }>();
 
 const RATE_LIMITS: Record<string, { max: number; windowMs: number }> = {
-  '/api/webhooks/stripe': { max: 100,  windowMs: 60_000 },
-  '/api/audit':           { max: 200,  windowMs: 60_000 },
-  '/api/process-document':{ max: 10,   windowMs: 60_000 }, // Strict limit against DDoS / Abuse
-  '/':                    { max: 60,   windowMs: 60_000 },
-  'default':              { max: 120,  windowMs: 60_000 },
+  '/api/webhook/lemonsqueezy': { max: 100,  windowMs: 60_000 },
+  '/api/webhook/mercadopago':  { max: 100,  windowMs: 60_000 },
+  '/api/audit':                { max: 200,  windowMs: 60_000 },
+  '/api/process-document':     { max: 10,   windowMs: 60_000 }, // Strict limit against DDoS / Abuse
+  '/':                         { max: 60,   windowMs: 60_000 },
+  'default':                   { max: 120,  windowMs: 60_000 },
 };
 
 function getRateLimit(pathname: string) {
@@ -47,12 +48,12 @@ const CSP = [
   "style-src 'self' 'unsafe-inline'",
   "img-src 'self' data: blob:",
   "font-src 'self'",
-  "connect-src 'self' https://api.stripe.com https://api.anthropic.com https://cdnjs.cloudflare.com https://unpkg.com",
-  "frame-src https://js.stripe.com https://hooks.stripe.com",
+  "connect-src 'self' https://api.stripe.com https://api.lemonsqueezy.com https://api.mercadopago.com https://api.anthropic.com https://cdnjs.cloudflare.com https://unpkg.com",
+  "frame-src https://js.stripe.com https://hooks.stripe.com https://*.lemonsqueezy.com https://*.mercadopago.com",
   "worker-src 'self' blob:",      // Requerido para Web Workers
   "object-src 'none'",
   "base-uri 'self'",
-  "form-action 'self'",
+  "form-action 'self' https://*.lemonsqueezy.com https://*.mercadopago.com",
   "upgrade-insecure-requests",
 ].join('; ');
 
@@ -74,7 +75,7 @@ const SECURITY_HEADERS: Record<string, string> = {
 
 // ── CSRF Protection ──────────────────────────────────────────────────────────
 // OWASP A01 | Excluye webhooks Stripe (verificados por HMAC)
-const CSRF_EXEMPT = ['/api/webhooks/stripe', '/api/checkout'];
+const CSRF_EXEMPT = ['/api/webhook/lemonsqueezy', '/api/webhook/mercadopago', '/api/checkout'];
 
 function validateCsrf(request: NextRequest): boolean {
   if (request.method === 'GET' || request.method === 'HEAD') return true;

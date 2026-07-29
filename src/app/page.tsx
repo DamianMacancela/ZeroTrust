@@ -30,10 +30,24 @@ export default function LegalTechLanding() {
     const query = new URLSearchParams(window.location.search);
     const payment = query.get('payment');
     if (payment === 'success') {
-      setIsProActive(true);
-      setHasUsedTrial(false);
-      localStorage.removeItem('grc_free_trial_used');
-      setErrorMessage('Transaccion verificada. Su entorno Enterprise dedicado esta activo.');
+      // H5 FIX: No activar Enterprise solo por URL param.
+      // Verificar estado real de la suscripción contra el servidor.
+      fetch('/api/usage')
+        .then(r => r.json())
+        .then(data => {
+          if (data.subscriptionActive === true) {
+            setIsProActive(true);
+            setHasUsedTrial(false);
+            localStorage.removeItem('grc_free_trial_used');
+            setErrorMessage('Transaccion verificada. Su entorno Enterprise dedicado esta activo.');
+          } else {
+            // Pago procesándose — mostrar mensaje de bienvenida sin acceso inmediato
+            setErrorMessage('Pago recibido. Su licencia Enterprise se activará en breve tras confirmación del procesador de pago.');
+          }
+        })
+        .catch(() => {
+          setErrorMessage('Pago recibido. Su licencia Enterprise se activará en breve tras confirmación del procesador de pago.');
+        });
     }
     if (payment === 'cancelled') {
       setErrorMessage('Operacion cancelada. Protocolo de pago interrumpido de forma segura.');
