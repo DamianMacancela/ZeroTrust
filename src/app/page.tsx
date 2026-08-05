@@ -568,6 +568,7 @@ export default function LegalTechLanding() {
             <div>
               <h4 className="text-xs font-bold text-slate-900 uppercase tracking-widest mb-4">Legal</h4>
               <ul className="space-y-2.5">
+                <li><a href="/guia-lopdp" className="text-xs font-black text-blue-600 hover:text-blue-800 transition-colors">🎁 Checklist Gratuito LOPDP</a></li>
                 <li><a href="/compliance" className="text-xs font-semibold text-slate-500 hover:text-slate-900 transition-colors">Cumplimiento Normativo (LATAM/UE)</a></li>
                 <li><a href="/api/dpa?org=Cliente&email=admin@cliente.com" className="text-xs font-semibold text-slate-500 hover:text-slate-900 transition-colors">Data Processing Agreement (DPA)</a></li>
                 <li><a href="/terms" className="text-xs font-semibold text-slate-500 hover:text-slate-900 transition-colors">Términos y Condiciones</a></li>
