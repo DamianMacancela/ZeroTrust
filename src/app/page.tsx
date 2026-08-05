@@ -555,6 +555,17 @@ export default function LegalTechLanding() {
             </div>
 
             <div>
+              <h4 className="text-xs font-bold text-slate-900 uppercase tracking-widest mb-4">Producto</h4>
+              <ul className="space-y-2.5">
+                <li><a href="#how-it-works" className="text-xs text-slate-500 hover:text-blue-600 transition-colors">Cómo Funciona (WebAssembly)</a></li>
+                <li><a href="#security" className="text-xs text-slate-500 hover:text-blue-600 transition-colors">Arquitectura Zero-Data</a></li>
+                <li><a href="/docs" className="text-xs text-slate-500 hover:text-blue-600 transition-colors">Documentación Técnica (API)</a></li>
+                <li><a href="/fundador" className="text-xs text-slate-500 hover:text-blue-600 transition-colors">Sobre el Fundador</a></li>
+                <li><a href="#pricing" className="text-xs text-slate-500 hover:text-blue-600 transition-colors">Precios y Licencias</a></li>
+              </ul>
+            </div>
+
+            <div>
               <h4 className="text-xs font-bold text-slate-900 uppercase tracking-widest mb-4">Legal</h4>
               <ul className="space-y-2.5">
                 <li><a href="/compliance" className="text-xs font-semibold text-slate-500 hover:text-slate-900 transition-colors">Cumplimiento Normativo (LATAM/UE)</a></li>
