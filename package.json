@@ -2,6 +2,7 @@
   "name": "zerotrust-redact",
   "version": "0.1.0",
   "private": true,
+  "author": "Damian Fabricio Macancela",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
