@@ -67,9 +67,6 @@ const SECURITY_HEADERS: Record<string, string> = {
   'X-DNS-Prefetch-Control':          'off',
   'Referrer-Policy':                 'strict-origin-when-cross-origin',
   'Permissions-Policy':              'camera=(), microphone=(), geolocation=(), payment=(self "https://js.stripe.com" "https://www.paypal.com")',
-  'Cross-Origin-Embedder-Policy':    'require-corp',
-  'Cross-Origin-Opener-Policy':      'same-origin',
-  'Cross-Origin-Resource-Policy':    'same-origin',
   'X-Robots-Tag':                    'noindex, nofollow',  // APIs no indexables
 };
 
