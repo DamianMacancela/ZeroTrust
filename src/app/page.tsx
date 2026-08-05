@@ -466,7 +466,7 @@ export default function LegalTechLanding() {
                         </a>
                       )}
                       <a 
-                        href={`https://wa.me/${process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '593983476198'}?text=Hola,%20deseo%20adquirir%20la%20Licencia%20Anual%20de%20ZeroTrust%20Redact%20($299)%20para%20mi%20firma%20y%20firmar%20el%20DPA.`} 
+                        href={`https://api.whatsapp.com/send?phone=${process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '593983476198'}&text=Hola,%20deseo%20adquirir%20la%20Licencia%20Anual%20de%20ZeroTrust%20Redact%20($299)%20para%20mi%20firma%20y%20firmar%20el%20DPA.`} 
                         target="_blank" 
                         rel="noopener noreferrer" 
                         className="w-full bg-[#10B981]/15 hover:bg-[#10B981]/25 text-[#34D399] border border-[#10B981]/30 py-3.5 px-4 rounded-xl font-black transition-all flex justify-center items-center gap-2 shadow-sm no-underline text-sm"
@@ -572,7 +572,7 @@ export default function LegalTechLanding() {
                 <li className="text-xs text-slate-500"><span className="font-semibold text-slate-700">Soporte:</span> soporte@zerotrust-tech.com</li>
                 <li className="text-xs text-slate-500"><span className="font-semibold text-slate-700">Legal / DPO:</span> legal@zerotrust-tech.com</li>
                 <li className="text-xs text-slate-500"><span className="font-semibold text-red-600">Emergencias 24/7:</span> damianmacancela@gmail.com</li>
-                <li><a href={`https://wa.me/${process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '593983476198'}?text=Hola,%20tengo%20una%20audiencia%20y%20me%20interesa%20el%20Programa%20de%20Afiliados%20(Comisiones).`} className="text-xs font-bold text-blue-600 hover:text-blue-800 transition-colors">Programa de Afiliados (Gana 30%)</a></li>
+                <li><a href="/afiliados" className="text-xs font-bold text-blue-600 hover:text-blue-800 transition-colors">Programa de Afiliados (Gana 30%)</a></li>
               </ul>
             </div>
 
