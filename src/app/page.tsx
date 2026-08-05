@@ -557,6 +557,7 @@ export default function LegalTechLanding() {
             <div>
               <h4 className="text-xs font-bold text-slate-900 uppercase tracking-widest mb-4">Producto</h4>
               <ul className="space-y-2.5">
+                <li><a href="/calculadora-multas" className="text-xs font-black text-red-600 hover:text-red-800 transition-colors">🔥 Calculadora de Multas LOPDP</a></li>
                 <li><a href="#how-it-works" className="text-xs text-slate-500 hover:text-blue-600 transition-colors">Cómo Funciona (WebAssembly)</a></li>
                 <li><a href="#security" className="text-xs text-slate-500 hover:text-blue-600 transition-colors">Arquitectura Zero-Data</a></li>
                 <li><a href="/docs" className="text-xs text-slate-500 hover:text-blue-600 transition-colors">Documentación Técnica (API)</a></li>
