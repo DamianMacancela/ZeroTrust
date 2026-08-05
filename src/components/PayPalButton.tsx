@@ -8,7 +8,7 @@ export default function PayPalButton({ planId, onSuccess, onError }: { planId: s
   const [verifying, setVerifying] = useState(false);
 
   useEffect(() => {
-    const clientId = process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID;
+    const clientId = process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID || 'BAAmA06uo1_3iEebrsu2b7onojjif_K6OoE5XY8-c4oPYSxx5vRnKzADPXHzD0Y1K0BOo48lqCoMN-ymIs';
     if (!clientId) return;
 
     // Avoid loading multiple times

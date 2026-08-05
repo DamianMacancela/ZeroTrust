@@ -446,9 +446,9 @@ export default function LegalTechLanding() {
                     </div>
                   ) : (
                     <div className="mt-auto space-y-3">
-                      {process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID && process.env.NEXT_PUBLIC_PAYPAL_PLAN_ID ? (
+                      {true ? (
                         <PayPalButton 
-                          planId={process.env.NEXT_PUBLIC_PAYPAL_PLAN_ID} 
+                          planId={process.env.NEXT_PUBLIC_PAYPAL_PLAN_ID || "P-7N588285294329012NJZH4EQ"} 
                           onSuccess={() => {
                             setIsProActive(true);
                             setHasUsedTrial(false);
