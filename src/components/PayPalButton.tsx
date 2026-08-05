@@ -14,7 +14,7 @@ export default function PayPalButton({ planId, onSuccess, onError }: { planId: s
   return (
     <div className="w-full relative z-10 min-h-[45px]">
       <PayPalScriptProvider options={{ 
-        clientId: clientId, 
+        "client-id": clientId, 
         vault: true, 
         intent: 'subscription' 
       }}>
