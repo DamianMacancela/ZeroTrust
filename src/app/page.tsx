@@ -9,6 +9,8 @@ import {
 import { downloadAuditReport } from '../components/AuditReportGenerator';
 import PayPalButton from '../components/PayPalButton';
 
+export const dynamic = 'force-dynamic';
+
 export default function LegalTechLanding() {
   const [trialStatus, setTrialStatus] = useState<'idle' | 'loading' | 'success' | 'used'>('idle');
   const [processingStage, setProcessingStage] = useState<string>('');

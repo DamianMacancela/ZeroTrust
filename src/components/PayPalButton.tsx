@@ -12,13 +12,14 @@ export default function PayPalButton({ planId, onSuccess, onError }: { planId: s
   }
 
   return (
-    <div className="w-full relative z-10 min-h-[45px]">
+    <div className="w-full relative z-10 min-h-[45px] bg-slate-800/20 rounded-xl p-2 border border-slate-700/30 flex items-center justify-center">
       <PayPalScriptProvider options={{ 
-        "client-id": clientId, 
+        clientId: clientId, 
         vault: true, 
         intent: 'subscription' 
       }}>
         <PayPalButtons
+          forceReRender={[planId]}
           style={{
             shape: 'pill',
             color: 'blue',
