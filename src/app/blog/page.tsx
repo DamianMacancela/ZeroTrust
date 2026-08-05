@@ -55,9 +55,23 @@ export default function BlogIndex() {
             <div className="text-sm font-bold text-blue-600 flex items-center gap-2">
               Leer Artículo Completo <ArrowRight className="w-4 h-4" />
             </div>
+            <div className="grid md:grid-cols-2 gap-8">
+              <Link href="/blog/riesgos-ilovepdf-abogados" className="group bg-white p-8 rounded-3xl border border-slate-200 shadow-sm hover:shadow-xl transition-all hover:-translate-y-1">
+                <span className="text-blue-600 text-sm font-bold tracking-widest uppercase mb-4 block">LegalTech / Estudios Jurídicos</span>
+                <h2 className="text-2xl font-black text-slate-900 mb-4 group-hover:text-blue-600 transition-colors">
+                  El Peligro de usar iLovePDF en Estudios Jurídicos (Multas LOPDP)
+                </h2>
+                <p className="text-slate-600 leading-relaxed mb-6">
+                  Descubre por qué los bufetes de abogados que usan editores de PDF online gratuitos están violando el secreto profesional y exponiéndose a multas.
+                </p>
+                <div className="flex items-center text-sm font-bold text-slate-900">
+                  Leer artículo <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-2 transition-transform" />
+                </div>
+              </Link>
+            </div>
           </Link>
 
-          <Link href="/blog/sector-salud-historias-clinicas" className="block bg-white p-8 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition-all group">
+          <Link href="/blog/sector-salud-historias-clinicas" className="group bg-white p-8 rounded-3xl border border-slate-200 shadow-sm hover:shadow-xl transition-all hover:-translate-y-1">
             <h2 className="text-2xl font-bold mb-3 text-slate-900 group-hover:text-blue-600 transition-colors">
               Privacidad de Pacientes y LOPDP en Clínicas y Hospitales
             </h2>
