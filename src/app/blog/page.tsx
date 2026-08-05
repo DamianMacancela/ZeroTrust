@@ -44,6 +44,18 @@ export default function BlogIndex() {
               Leer Artículo Completo <ArrowRight className="w-4 h-4" />
             </div>
           </Link>
+
+          <Link href="/blog/secreto-bancario-ciberseguridad" className="block bg-white p-8 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition-all group">
+            <h2 className="text-2xl font-bold mb-3 text-slate-900 group-hover:text-blue-600 transition-colors">
+              Banca y Fintech: El Riesgo de Romper el Secreto Bancario en la Nube
+            </h2>
+            <p className="text-slate-600 mb-6">
+              Conoce cómo las instituciones financieras en Ecuador pueden proteger el secreto bancario ofuscando datos en PDFs locales sin usar APIs externas.
+            </p>
+            <div className="text-sm font-bold text-blue-600 flex items-center gap-2">
+              Leer Artículo Completo <ArrowRight className="w-4 h-4" />
+            </div>
+          </Link>
         </div>
       </main>
     </div>
