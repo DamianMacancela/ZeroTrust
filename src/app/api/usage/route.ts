@@ -28,11 +28,34 @@ async function getValidatedCount() {
 }
 
 export async function GET() {
+  const cookieStore = await cookies();
+  
+  // 1. Check for Enterprise Token (PayPal active subscription)
+  const enterpriseCookie = cookieStore.get('grc_enterprise_token')?.value;
+  let isEnterprise = false;
+  
+  if (enterpriseCookie) {
+    try {
+      const payload = Buffer.from(enterpriseCookie, 'base64').toString('utf8');
+      const { status, sig } = JSON.parse(payload);
+      const expectedSig = createHmac('sha256', SECRET).update('enterprise_active').digest('hex');
+      
+      if (sig === expectedSig && status === 'active') {
+        isEnterprise = true;
+      }
+    } catch (e) {
+      // Invalid cookie, ignore
+    }
+  }
+
+  // 2. Check for free trial limit
   const count = await getValidatedCount();
-  // subscriptionActive se actualizará a true cuando el webhook procese un pago real
-  // Por ahora, solo verificamos trial usage. En producción completa,
-  // esto consultaría Supabase para verificar users.role === 'ENTERPRISE'.
-  return NextResponse.json({ count, allowed: count < FREE_LIMIT, subscriptionActive: false });
+  
+  return NextResponse.json({ 
+    count, 
+    allowed: isEnterprise || count < FREE_LIMIT, 
+    subscriptionActive: isEnterprise 
+  });
 }
 
 export async function POST() {

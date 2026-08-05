@@ -7,6 +7,7 @@ import {
   Archive, Database, Server, Fingerprint, FileCode, Loader2, MessageCircle
 } from 'lucide-react';
 import { downloadAuditReport } from '../components/AuditReportGenerator';
+import PayPalButton from '../components/PayPalButton';
 
 export default function LegalTechLanding() {
   const [trialStatus, setTrialStatus] = useState<'idle' | 'loading' | 'success' | 'used'>('idle');
@@ -445,10 +446,23 @@ export default function LegalTechLanding() {
                     </div>
                   ) : (
                     <div className="mt-auto space-y-3">
-                      <a href="/api/checkout/enterprise" className="w-full bg-[#0EA5E9] hover:bg-[#0284C7] text-white py-3.5 px-4 rounded-xl font-black transition-all flex justify-center items-center gap-2 shadow-lg hover:shadow-xl no-underline text-sm">
-                        <Database className="h-5 w-5 shrink-0" />
-                        <span>Comprar en Línea (Tarjeta / PayPal)</span>
-                      </a>
+                      {process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID && process.env.NEXT_PUBLIC_PAYPAL_PLAN_ID ? (
+                        <PayPalButton 
+                          planId={process.env.NEXT_PUBLIC_PAYPAL_PLAN_ID} 
+                          onSuccess={() => {
+                            setIsProActive(true);
+                            setHasUsedTrial(false);
+                            localStorage.removeItem('grc_free_trial_used');
+                            setErrorMessage('');
+                          }}
+                          onError={(err) => setErrorMessage(err)}
+                        />
+                      ) : (
+                        <a href="/api/checkout/enterprise" className="w-full bg-[#0EA5E9] hover:bg-[#0284C7] text-white py-3.5 px-4 rounded-xl font-black transition-all flex justify-center items-center gap-2 shadow-lg hover:shadow-xl no-underline text-sm">
+                          <Database className="h-5 w-5 shrink-0" />
+                          <span>Comprar en Línea (Tarjeta / PayPal)</span>
+                        </a>
+                      )}
                       <a 
                         href={`https://wa.me/${process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '593999999999'}?text=Hola,%20deseo%20contratar%20la%20Licencia%20Enterprise%20de%20ZeroTrust%20Redact%20para%20mi%20empresa.`} 
                         target="_blank" 
