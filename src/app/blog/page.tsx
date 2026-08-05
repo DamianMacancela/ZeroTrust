@@ -56,6 +56,18 @@ export default function BlogIndex() {
               Leer Artículo Completo <ArrowRight className="w-4 h-4" />
             </div>
           </Link>
+
+          <Link href="/blog/sector-salud-historias-clinicas" className="block bg-white p-8 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition-all group">
+            <h2 className="text-2xl font-bold mb-3 text-slate-900 group-hover:text-blue-600 transition-colors">
+              Privacidad de Pacientes y LOPDP en Clínicas y Hospitales
+            </h2>
+            <p className="text-slate-600 mb-6">
+              El sector salud es el más vulnerable a demandas por fugas de historias clínicas. Descubre cómo anonimizar datos médicos localmente.
+            </p>
+            <div className="text-sm font-bold text-blue-600 flex items-center gap-2">
+              Leer Artículo Completo <ArrowRight className="w-4 h-4" />
+            </div>
+          </Link>
         </div>
       </main>
     </div>
