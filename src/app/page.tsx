@@ -466,15 +466,15 @@ export default function LegalTechLanding() {
                         </a>
                       )}
                       <a 
-                        href={`https://wa.me/${process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '593999999999'}?text=Hola,%20deseo%20contratar%20la%20Licencia%20Enterprise%20de%20ZeroTrust%20Redact%20para%20mi%20empresa.`} 
+                        href={`https://wa.me/${process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '593999999999'}?text=Hola,%20deseo%20adquirir%20la%20Licencia%20Anual%20de%20ZeroTrust%20Redact%20($299)%20para%20mi%20firma%20y%20firmar%20el%20DPA.`} 
                         target="_blank" 
                         rel="noopener noreferrer" 
                         className="w-full bg-[#10B981]/15 hover:bg-[#10B981]/25 text-[#34D399] border border-[#10B981]/30 py-3.5 px-4 rounded-xl font-black transition-all flex justify-center items-center gap-2 shadow-sm no-underline text-sm"
                       >
                         <MessageCircle className="h-5 w-5 text-[#34D399] shrink-0" />
-                        <span>Atención B2B por WhatsApp (Facturación / Transferencia)</span>
+                        <span>Adquirir Licencia Anual por WhatsApp ($299/año)</span>
                       </a>
-                      <p className="text-[11px] text-slate-500 text-center mt-3 font-bold tracking-wide">Pago instantáneo seguro · Cumplimiento legal LOPD & GDPR para empresas.</p>
+                      <p className="text-[11px] text-slate-500 text-center mt-3 font-bold tracking-wide">Ahorra un 17% con el plan anual · Facturación B2B inmediata.</p>
                     </div>
                   )}
               </div>

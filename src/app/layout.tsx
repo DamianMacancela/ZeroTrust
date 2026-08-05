@@ -14,11 +14,20 @@ export const metadata: Metadata = {
     siteName: "ZeroTrust Redact",
     locale: "es_ES",
     type: "website",
+    images: [
+      {
+        url: "https://zerotrust-redact.vercel.app/og-image.jpg",
+        width: 1200,
+        height: 630,
+        alt: "ZeroTrust Redact Premium Cover",
+      }
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "ZeroTrust Redact | Saneamiento de Datos Sensibles",
     description: "Redacta datos confidenciales (PII) en tus documentos legales directamente en tu navegador con nuestra arquitectura Zero-Data.",
+    images: ["https://zerotrust-redact.vercel.app/og-image.jpg"],
   },
   robots: {
     index: true,
