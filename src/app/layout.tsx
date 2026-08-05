@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { CookieBanner } from "@/components/CookieBanner";
+import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 export const metadata: Metadata = {
   title: "ZeroTrust Redact | LegalTech B2B",
@@ -51,6 +53,8 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
       <body className="antialiased">
         {children}
         <CookieBanner />
+        <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );
