@@ -69,6 +69,8 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
+        {/* Lemon Squeezy Affiliate Tracking Script */}
+        <script src="https://app.lemonsqueezy.com/js/lemon.js" defer></script>
       </head>
       <body className="antialiased">
         {children}
