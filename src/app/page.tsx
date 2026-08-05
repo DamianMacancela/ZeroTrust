@@ -571,6 +571,7 @@ export default function LegalTechLanding() {
               <ul className="space-y-2.5">
                 <li className="text-xs text-slate-500"><span className="font-semibold text-slate-700">Soporte:</span> soporte@zerotrust-tech.com</li>
                 <li className="text-xs text-slate-500"><span className="font-semibold text-slate-700">Legal / DPO:</span> legal@zerotrust-tech.com</li>
+                <li className="text-xs text-slate-500"><span className="font-semibold text-red-600">Emergencias 24/7:</span> damianmacancela@gmail.com</li>
                 <li><a href={`https://wa.me/${process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '593983476198'}?text=Hola,%20tengo%20una%20audiencia%20y%20me%20interesa%20el%20Programa%20de%20Afiliados%20(Comisiones).`} className="text-xs font-bold text-blue-600 hover:text-blue-800 transition-colors">Programa de Afiliados (Gana 30%)</a></li>
               </ul>
             </div>
