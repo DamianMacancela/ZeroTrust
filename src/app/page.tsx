@@ -577,7 +577,7 @@ export default function LegalTechLanding() {
           </div>
           <div className="border-t border-slate-100 mt-10 pt-6 flex flex-col sm:flex-row items-center justify-between gap-2">
             <p className="text-[11px] text-slate-400 font-medium">© 2027 ZeroTrust Tech. Todos los derechos reservados.</p>
-            <p className="text-[11px] text-slate-400 font-medium">Pagos procesados por Lemon Squeezy (Merchant of Record) · Cumplimiento B2B Global</p>
+            <p className="text-[11px] text-slate-400 font-medium">Pagos procesados de forma segura por Stripe y PayPal · Cumplimiento B2B Global</p>
           </div>
         </div>
       </footer>
