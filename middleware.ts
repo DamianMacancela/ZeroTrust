@@ -44,16 +44,16 @@ function checkRateLimit(ip: string, pathname: string): boolean {
 // OWASP A03 (XSS) | SOC 2 CC7.1
 const CSP = [
   "default-src 'self'",
-  "script-src 'self' 'unsafe-eval' 'unsafe-inline' https://js.stripe.com https://cdnjs.cloudflare.com https://unpkg.com https://www.paypal.com",
-  "style-src 'self' 'unsafe-inline'",
-  "img-src 'self' data: blob: https://www.paypalobjects.com",
-  "font-src 'self'",
-  "connect-src 'self' https://api.stripe.com https://api.lemonsqueezy.com https://api.mercadopago.com https://api.anthropic.com https://cdnjs.cloudflare.com https://unpkg.com https://www.paypal.com",
-  "frame-src https://js.stripe.com https://hooks.stripe.com https://*.lemonsqueezy.com https://*.mercadopago.com https://www.paypal.com https://www.sandbox.paypal.com",
+  "script-src 'self' 'unsafe-eval' 'unsafe-inline' https://js.stripe.com https://cdnjs.cloudflare.com https://unpkg.com https://www.paypal.com https://*.paypal.com https://*.paypalobjects.com",
+  "style-src 'self' 'unsafe-inline' https://*.paypal.com",
+  "img-src 'self' data: blob: https://www.paypalobjects.com https://*.paypal.com",
+  "font-src 'self' https://*.paypal.com",
+  "connect-src 'self' https://api.stripe.com https://api.lemonsqueezy.com https://api.mercadopago.com https://api.anthropic.com https://cdnjs.cloudflare.com https://unpkg.com https://www.paypal.com https://*.paypal.com https://*.paypalobjects.com",
+  "frame-src https://js.stripe.com https://hooks.stripe.com https://*.lemonsqueezy.com https://*.mercadopago.com https://www.paypal.com https://www.sandbox.paypal.com https://*.paypal.com",
   "worker-src 'self' blob:",      // Requerido para Web Workers
   "object-src 'none'",
   "base-uri 'self'",
-  "form-action 'self' https://*.lemonsqueezy.com https://*.mercadopago.com",
+  "form-action 'self' https://*.lemonsqueezy.com https://*.mercadopago.com https://*.paypal.com",
   "upgrade-insecure-requests",
 ].join('; ');
 
@@ -66,7 +66,7 @@ const SECURITY_HEADERS: Record<string, string> = {
   'X-Content-Type-Options':          'nosniff',
   'X-DNS-Prefetch-Control':          'off',
   'Referrer-Policy':                 'strict-origin-when-cross-origin',
-  'Permissions-Policy':              'camera=(), microphone=(), geolocation=(), payment=(self "https://js.stripe.com")',
+  'Permissions-Policy':              'camera=(), microphone=(), geolocation=(), payment=(self "https://js.stripe.com" "https://www.paypal.com")',
   'Cross-Origin-Embedder-Policy':    'require-corp',
   'Cross-Origin-Opener-Policy':      'same-origin',
   'Cross-Origin-Resource-Policy':    'same-origin',
