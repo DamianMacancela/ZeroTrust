@@ -48,8 +48,28 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "ZeroTrust Redact",
+    "operatingSystem": "Any",
+    "applicationCategory": "BusinessApplication",
+    "offers": {
+      "@type": "Offer",
+      "price": "299.00",
+      "priceCurrency": "USD"
+    },
+    "description": "Plataforma de ofuscación de documentos confidenciales con arquitectura Zero-Data para cumplimiento de LOPDP.",
+  };
+
   return (
     <html lang="es">
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+      </head>
       <body className="antialiased">
         {children}
         <CookieBanner />
