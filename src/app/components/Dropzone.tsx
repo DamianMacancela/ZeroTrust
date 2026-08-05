@@ -1,4 +1,4 @@
-﻿'use client';
+'use client';
 import { useState, useRef, useCallback } from 'react';
 import { z } from 'zod';
 import { Upload, AlertCircle, Download, Loader2 } from 'lucide-react';
@@ -107,9 +107,33 @@ export default function Dropzone({ onComplete }: { onComplete?: () => void }) {
       )}
 
       {status === 'done' && (
-        <div className="mt-5 flex items-center justify-center animate-in fade-in zoom-in duration-300">
-          <div className="inline-flex items-center gap-2 px-4 py-2 bg-emerald-50 text-emerald-700 font-medium rounded-lg border border-emerald-200">
-            <Download className="w-4 h-4" /> ¡Documento Seguro Descargado!
+        <div className="mt-5 animate-in fade-in zoom-in duration-300">
+          <div className="flex items-center justify-center mb-4">
+            <div className="inline-flex items-center gap-2 px-4 py-2 bg-emerald-50 text-emerald-700 font-medium rounded-lg border border-emerald-200">
+              <Download className="w-4 h-4" /> ¡Documento Seguro Descargado!
+            </div>
+          </div>
+          
+          <div className="mt-6 pt-6 border-t border-slate-200">
+            <p className="text-sm font-bold text-slate-700 text-center mb-4">¿Te sorprendió la tecnología Zero-Data? Compártela con tu red:</p>
+            <div className="flex flex-col sm:flex-row justify-center items-center gap-3">
+              <a 
+                href="https://www.linkedin.com/sharing/share-offsite/?url=https://zerotrust-redact.vercel.app/" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 bg-[#0077B5] hover:bg-[#006396] text-white text-xs font-bold py-2 px-4 rounded-lg transition-colors w-full sm:w-auto justify-center"
+              >
+                Compartir en LinkedIn
+              </a>
+              <a 
+                href="https://api.whatsapp.com/send?text=Acabo%20de%20usar%20esta%20herramienta%20para%20borrar%20datos%20confidenciales%20sin%20internet.%20Evita%20multas%20de%20la%20LOPDP:%20https://zerotrust-redact.vercel.app/" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 bg-[#25D366] hover:bg-[#1DA851] text-white text-xs font-bold py-2 px-4 rounded-lg transition-colors w-full sm:w-auto justify-center"
+              >
+                Recomendar por WhatsApp
+              </a>
+            </div>
           </div>
         </div>
       )}
