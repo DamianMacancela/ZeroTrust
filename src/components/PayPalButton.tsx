@@ -4,15 +4,29 @@ import { useEffect, useState } from 'react';
 
 export default function PayPalButton({ planId, onSuccess, onError }: { planId: string, onSuccess: () => void, onError: (err: string) => void }) {
   const [scriptLoaded, setScriptLoaded] = useState(false);
-  // ✅ SECURITY FIX: Never use a hardcoded fallback for credentials.
-  // If NEXT_PUBLIC_PAYPAL_CLIENT_ID is missing, fail early and visibly.
-  const clientId = process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID;
+  const [clientId, setClientId] = useState<string | null>(process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID || null);
 
+  // 1. Obtener Client ID desde el backend o env local
   useEffect(() => {
-    if (!clientId) {
-      onError("El módulo de pago no está configurado. Contacta a soporte: damianmacancela@gmail.com");
-      return;
-    }
+    if (clientId) return;
+
+    fetch('/api/checkout/paypal/config')
+      .then(res => res.json())
+      .then(data => {
+        if (data.clientId) {
+          setClientId(data.clientId);
+        } else {
+          onError("El módulo de pago no está configurado. Contacta a soporte.");
+        }
+      })
+      .catch(() => {
+        onError("No se pudo conectar con el servidor de pagos.");
+      });
+  }, [clientId, onError]);
+
+  // 2. Cargar script de PayPal SDK
+  useEffect(() => {
+    if (!clientId) return;
 
     if (document.getElementById('paypal-sdk-raw')) {
       setScriptLoaded(true);
@@ -25,17 +39,18 @@ export default function PayPalButton({ planId, onSuccess, onError }: { planId: s
     script.async = true;
     script.onload = () => setScriptLoaded(true);
     script.onerror = () => {
-      console.error("Fallo al cargar el script de PayPal SDK. Revisa tu ad-blocker o el CSP.");
+      console.error("Fallo al cargar el script de PayPal SDK.");
       onError("Bloqueador de anuncios detectado. Desactívalo para pagar con PayPal.");
     };
     document.body.appendChild(script);
   }, [clientId, onError]);
 
+  // 3. Renderizar botones de PayPal
   useEffect(() => {
-    if (scriptLoaded && (window as any).paypal) {
+    if (scriptLoaded && (window as any).paypal && clientId) {
       const container = document.getElementById('paypal-button-container-enterprise');
       if (container) {
-        container.innerHTML = ''; // Limpiar para evitar duplicados en React Strict Mode
+        container.innerHTML = '';
       }
       
       try {
@@ -69,7 +84,7 @@ export default function PayPalButton({ planId, onSuccess, onError }: { planId: s
         console.error("Error renderizando PayPal", error);
       }
     }
-  }, [scriptLoaded, planId, onSuccess, onError]);
+  }, [scriptLoaded, clientId, planId, onSuccess, onError]);
 
   return (
     <div className="w-full relative z-10 min-h-[45px] bg-slate-800/20 rounded-xl p-4 border border-slate-700/30 flex flex-col items-center justify-center">
