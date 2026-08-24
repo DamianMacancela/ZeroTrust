@@ -4,9 +4,16 @@ import { useEffect, useState } from 'react';
 
 export default function PayPalButton({ planId, onSuccess, onError }: { planId: string, onSuccess: () => void, onError: (err: string) => void }) {
   const [scriptLoaded, setScriptLoaded] = useState(false);
-  const clientId = process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID || 'BAAmA06uo1_3iEebrsu2b7onojjif_K6OoE5XY8-c4oPYSxx5vRnKzADPXHzD0Y1K0BOo48lqCoMN-ymIs';
+  // ✅ SECURITY FIX: Never use a hardcoded fallback for credentials.
+  // If NEXT_PUBLIC_PAYPAL_CLIENT_ID is missing, fail early and visibly.
+  const clientId = process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID;
 
   useEffect(() => {
+    if (!clientId) {
+      onError("El módulo de pago no está configurado. Contacta a soporte: damianmacancela@gmail.com");
+      return;
+    }
+
     if (document.getElementById('paypal-sdk-raw')) {
       setScriptLoaded(true);
       return;
@@ -19,7 +26,7 @@ export default function PayPalButton({ planId, onSuccess, onError }: { planId: s
     script.onload = () => setScriptLoaded(true);
     script.onerror = () => {
       console.error("Fallo al cargar el script de PayPal SDK. Revisa tu ad-blocker o el CSP.");
-      onError("Bloqueador de anuncios detectado. Desactiva tu ad-blocker para pagar con PayPal.");
+      onError("Bloqueador de anuncios detectado. Desactívalo para pagar con PayPal.");
     };
     document.body.appendChild(script);
   }, [clientId, onError]);
@@ -55,7 +62,7 @@ export default function PayPalButton({ planId, onSuccess, onError }: { planId: s
               if (result.success) onSuccess();
               else onError(result.error || 'Error al validar suscripción.');
             })
-            .catch(err => onError('Error de conexión al verificar el pago.'));
+            .catch(() => onError('Error de conexión al verificar el pago.'));
           }
         }).render('#paypal-button-container-enterprise');
       } catch (error) {
