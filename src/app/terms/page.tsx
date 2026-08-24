@@ -57,7 +57,7 @@ export default function TermsPage() {
               <h3 className="text-lg font-bold text-slate-800 mb-2">3.2. Licencia Enterprise (Suscripción de Pago)</h3>
               <p className="mb-3">El plan Enterprise proporciona acceso ilimitado al motor de ofuscación, soporte prioritario, procesamiento en lote y funcionalidades avanzadas. La suscripción se factura de forma recurrente (mensual) a través de Stripe, Inc., pasarela de pago certificada PCI-DSS Nivel 1.</p>
               <ul className="list-disc pl-6 space-y-2">
-                <li><strong>Precio:</strong> USD $29.99 por mes, más impuestos aplicables según la jurisdicción del Usuario.</li>
+                <li><strong>Precio:</strong> USD $19.99 por mes o USD $215.90 por año (con 10% de descuento incluido), más impuestos aplicables según la jurisdicción del Usuario.</li>
                 <li><strong>Ciclo de facturación:</strong> El cargo se realiza automáticamente cada 30 días naturales a partir de la fecha de activación.</li>
                 <li><strong>Activación:</strong> El acceso Enterprise se activa de forma instantánea tras la confirmación del pago por parte de Stripe.</li>
               </ul>

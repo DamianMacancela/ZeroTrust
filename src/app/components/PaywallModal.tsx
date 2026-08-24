@@ -69,7 +69,7 @@ export default function PaywallModal({ onClose }: Props) {
             {isPending ? (
               <div className="w-5 h-5 border-2 border-[#020b14] border-t-transparent rounded-full animate-spin" />
             ) : (
-              <><Zap className="w-5 h-5" /> Iniciar Suscripción — $29.99/mes</>
+              <><Zap className="w-5 h-5" /> Iniciar Suscripción — $19.99/mes (o $215.90/año)</>
             )}
           </button>
           

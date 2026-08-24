@@ -41,7 +41,7 @@ export class MercadoPagoGateway implements IPaymentGateway {
             title: 'ZeroTrust Redact — Licencia Enterprise',
             description: 'Suscripción mensual al motor de ofuscación Zero-Data nivel Enterprise.',
             quantity: 1,
-            unit_price: 29.99,
+            unit_price: 19.99,
             currency_id: 'USD',
           },
         ],

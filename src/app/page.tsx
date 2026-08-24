@@ -385,6 +385,14 @@ export default function LegalTechLanding() {
                   <h3 className="text-3xl font-black text-white mb-3 tracking-tight">Licencia Enterprise</h3>
 
 
+                  <div className="flex items-baseline gap-2 mb-4">
+                    <span className="text-4xl font-black text-white">$19.99</span>
+                    <span className="text-sm font-semibold text-slate-400">/mes</span>
+                    <span className="ml-2 text-xs font-bold text-emerald-400 bg-emerald-950/60 border border-emerald-500/30 px-2 py-0.5 rounded-md">
+                      o $215.90/año (10% OFF)
+                    </span>
+                  </div>
+
                   <p className="text-slate-400 mb-8 font-medium text-sm leading-relaxed">Plataforma integral para departamentos de Compliance y Legal. Contrato de Procesamiento de Datos (DPA) garantizado como Encargados de Tratamiento.</p>
                   
                   <ul className="space-y-4 mb-10">
@@ -466,15 +474,15 @@ export default function LegalTechLanding() {
                         </a>
                       )}
                       <a 
-                        href={`https://api.whatsapp.com/send?phone=${process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '593983476198'}&text=Hola,%20deseo%20adquirir%20la%20Licencia%20Anual%20de%20ZeroTrust%20Redact%20($299)%20para%20mi%20firma%20y%20firmar%20el%20DPA.`} 
+                        href={`https://api.whatsapp.com/send?phone=${process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '593983476198'}&text=Hola,%20deseo%20adquirir%20la%20Licencia%20Enterprise%20de%20ZeroTrust%20Redact%20($19.99/mes%20o%20$215.90/a%C3%B1o%20con%2010%25%20de%20descuento)%20para%20mi%20firma%20y%20firmar%20el%20DPA.`} 
                         target="_blank" 
                         rel="noopener noreferrer" 
                         className="w-full bg-[#10B981]/15 hover:bg-[#10B981]/25 text-[#34D399] border border-[#10B981]/30 py-3.5 px-4 rounded-xl font-black transition-all flex justify-center items-center gap-2 shadow-sm no-underline text-sm"
                       >
                         <MessageCircle className="h-5 w-5 text-[#34D399] shrink-0" />
-                        <span>Adquirir Licencia Anual por WhatsApp ($299/año)</span>
+                        <span>Adquirir por WhatsApp ($19.99/mes ó $215.90/año)</span>
                       </a>
-                      <p className="text-[11px] text-slate-500 text-center mt-3 font-bold tracking-wide">Ahorra un 17% con el plan anual · Facturación B2B inmediata.</p>
+                      <p className="text-[11px] text-slate-500 text-center mt-3 font-bold tracking-wide">Ahorra 10% con el plan anual ($215.90/año) · Facturación B2B inmediata.</p>
                     </div>
                   )}
               </div>

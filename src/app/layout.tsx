@@ -58,7 +58,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
     "applicationCategory": "BusinessApplication",
     "offers": {
       "@type": "Offer",
-      "price": "299.00",
+      "price": "19.99",
       "priceCurrency": "USD"
     },
     "description": "Plataforma de ofuscación de documentos confidenciales con arquitectura Zero-Data para cumplimiento de LOPDP.",

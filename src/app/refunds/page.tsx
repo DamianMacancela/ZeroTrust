@@ -38,7 +38,7 @@ export default function RefundsPage() {
 
             <section>
               <h2 className="text-2xl font-bold text-slate-900 mb-4 tracking-tight">2. Suscripción Enterprise</h2>
-              <p className="mb-3">La Licencia Enterprise se factura de forma recurrente al precio publicado de <strong>USD $29.99 por mes</strong>. El cargo se realiza automáticamente cada 30 días naturales a través de Stripe.</p>
+              <p className="mb-3">La Licencia Enterprise se factura de forma recurrente al precio publicado de <strong>USD $19.99 por mes</strong> (o <strong>USD $215.90 por año</strong> con 10% de descuento). El cargo se realiza automáticamente según el ciclo contratado a través de nuestra pasarela de pagos.</p>
               <div className="bg-slate-50 rounded-xl border border-slate-100 p-6 space-y-3 my-4">
                 <p className="font-bold text-slate-900">Resumen de Facturación:</p>
                 <ul className="list-disc pl-6 space-y-2">

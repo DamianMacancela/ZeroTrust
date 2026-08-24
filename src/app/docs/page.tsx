@@ -84,7 +84,7 @@ downloadLocal(redactedBytes);`}
 
             <section id="enterprise" className="mb-16">
               <h2 className="text-2xl font-bold mb-6">Integración Enterprise B2B</h2>
-              <p className="text-slate-600 mb-4">Para firmas de abogados, hospitales y departamentos contables, la licencia Enterprise ($299/año) elimina todas las restricciones de páginas y peso de archivo, habilitando el procesamiento de expedientes masivos.</p>
+              <p className="text-slate-600 mb-4">Para firmas de abogados, hospitales y departamentos contables, la licencia Enterprise ($19.99/mes o $215.90/año con 10% de descuento) elimina todas las restricciones de páginas y peso de archivo, habilitando el procesamiento de expedientes masivos.</p>
               <div className="bg-slate-50 border border-slate-200 rounded-xl p-6">
                 <h4 className="font-bold mb-2">¿Necesitas una API o un Despliegue On-Premise?</h4>
                 <p className="text-sm text-slate-600 mb-4">Podemos integrar nuestro motor WebAssembly directamente en la intranet de tu corporación (SharePoint, Sistemas de Gestión Documental). Contáctanos para discutir una arquitectura personalizada.</p>

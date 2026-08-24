@@ -54,7 +54,7 @@ export default function AffiliatesPage() {
               Monetiza tu influencia en el sector <span className="text-blue-600">Legal y Médico</span>
             </h1>
             <p className="text-xl md:text-2xl text-slate-600 font-medium max-w-3xl mx-auto leading-relaxed">
-              Únete al programa de Partners B2B de ZeroTrust Redact. Gana un <span className="font-bold text-slate-900 bg-emerald-100 px-2 py-1 rounded-md">30% de comisión recurrente ($90 USD)</span> por cada empresa que protejas con nuestra tecnología Zero-Data.
+              Únete al programa de Partners B2B de ZeroTrust Redact. Gana un <span className="font-bold text-slate-900 bg-emerald-100 px-2 py-1 rounded-md">30% de comisión recurrente (~$65 USD/año)</span> por cada empresa que protejas con nuestra tecnología Zero-Data.
             </p>
           </div>
         </section>
