@@ -104,7 +104,7 @@ export default function LOPDPCalculator() {
                       ¿Vale la pena arriesgar <strong>${fine.toLocaleString()}</strong> por ahorrar usando un editor de PDFs gratuito que roba tus datos?
                     </p>
                     <Link href="/" className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-500 text-white font-bold py-4 px-8 rounded-xl transition-all w-full justify-center">
-                      Blindar mi Empresa desde $19.99/mes <ArrowRight className="w-5 h-5" />
+                      Blindar mi Empresa por $299 <ArrowRight className="w-5 h-5" />
                     </Link>
                   </div>
                 </div>

@@ -21,7 +21,6 @@ export default function LegalTechLanding() {
   const [hasUsedTrial, setHasUsedTrial] = useState(false);
   const [isProActive, setIsProActive] = useState(false);
   const [isDragging, setIsDragging] = useState(false);
-  const [billingCycle, setBillingCycle] = useState<'annual' | 'monthly'>('annual');
   const workerRef = useRef<Worker | null>(null);
   
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -386,58 +385,6 @@ export default function LegalTechLanding() {
                   <h3 className="text-3xl font-black text-white mb-3 tracking-tight">Licencia Enterprise</h3>
 
 
-                  {/* SELECTOR DE PLAN MENSUAL / ANUAL DIRECTO */}
-                  <div className="flex bg-[#0F172A] p-1.5 rounded-2xl border border-slate-800 mb-6 gap-1">
-                    <button
-                      type="button"
-                      onClick={() => setBillingCycle('annual')}
-                      className={`flex-1 py-2.5 px-3 rounded-xl text-xs font-black transition-all flex flex-col items-center justify-center ${
-                        billingCycle === 'annual'
-                          ? 'bg-[#38BDF8] text-slate-950 shadow-md'
-                          : 'text-slate-400 hover:text-white'
-                      }`}
-                    >
-                      <span className="flex items-center gap-1.5">
-                        Plan Anual
-                        <span className="bg-emerald-500 text-slate-950 text-[9px] font-black px-1.5 py-0.5 rounded-full uppercase">10% OFF</span>
-                      </span>
-                      <span className="text-[10px] opacity-80 mt-0.5">$215.90 / año (~$17.99/mes)</span>
-                    </button>
-                    
-                    <button
-                      type="button"
-                      onClick={() => setBillingCycle('monthly')}
-                      className={`flex-1 py-2.5 px-3 rounded-xl text-xs font-black transition-all flex flex-col items-center justify-center ${
-                        billingCycle === 'monthly'
-                          ? 'bg-[#38BDF8] text-slate-950 shadow-md'
-                          : 'text-slate-400 hover:text-white'
-                      }`}
-                    >
-                      <span>Plan Mensual</span>
-                      <span className="text-[10px] opacity-80 mt-0.5">$19.99 / mes</span>
-                    </button>
-                  </div>
-
-                  <div className="flex items-baseline gap-2 mb-4">
-                    {billingCycle === 'annual' ? (
-                      <>
-                        <span className="text-4xl font-black text-white">$215.90</span>
-                        <span className="text-sm font-semibold text-slate-400">/año</span>
-                        <span className="ml-2 text-xs font-bold text-emerald-400 bg-emerald-950/60 border border-emerald-500/30 px-2 py-0.5 rounded-md">
-                          Ahorras $24.00 (10% OFF)
-                        </span>
-                      </>
-                    ) : (
-                      <>
-                        <span className="text-4xl font-black text-white">$19.99</span>
-                        <span className="text-sm font-semibold text-slate-400">/mes</span>
-                        <span className="ml-2 text-xs font-bold text-slate-400 bg-slate-800 px-2 py-0.5 rounded-md">
-                          Facturación mensual
-                        </span>
-                      </>
-                    )}
-                  </div>
-
                   <p className="text-slate-400 mb-8 font-medium text-sm leading-relaxed">Plataforma integral para departamentos de Compliance y Legal. Contrato de Procesamiento de Datos (DPA) garantizado como Encargados de Tratamiento.</p>
                   
                   <ul className="space-y-4 mb-10">
@@ -501,17 +448,9 @@ export default function LegalTechLanding() {
                     </div>
                   ) : (
                     <div className="mt-auto space-y-3">
-                      {/* BOTÓN DIRECTO DE PAYPAL PARA EL PLAN SELECCIONADO */}
-                      <div className="space-y-1">
-                        <div className="text-[11px] font-bold text-slate-300 flex justify-between px-1">
-                          <span>Pagar con PayPal o Tarjeta:</span>
-                          <span className="text-[#38BDF8] font-black">
-                            {billingCycle === 'annual' ? '$215.90 USD (Anual)' : '$19.99 USD (Mensual)'}
-                          </span>
-                        </div>
+                      {true ? (
                         <PayPalButton 
-                          amount={billingCycle === 'annual' ? '215.90' : '19.99'}
-                          planType={billingCycle}
+                          planId={process.env.NEXT_PUBLIC_PAYPAL_PLAN_ID || "P-7N588285294329012NJZH4EQ"} 
                           onSuccess={() => {
                             setIsProActive(true);
                             setHasUsedTrial(false);
@@ -520,23 +459,22 @@ export default function LegalTechLanding() {
                           }}
                           onError={(err) => setErrorMessage(err)}
                         />
-                      </div>
-
-                      {/* BOTÓN DIRECTO DE WHATSAPP / FACTURACIÓN MANUAL */}
+                      ) : (
+                        <a href="/api/checkout/enterprise" className="w-full bg-[#0EA5E9] hover:bg-[#0284C7] text-white py-3.5 px-4 rounded-xl font-black transition-all flex justify-center items-center gap-2 shadow-lg hover:shadow-xl no-underline text-sm">
+                          <Database className="h-5 w-5 shrink-0" />
+                          <span>Comprar en Línea (Tarjeta / PayPal)</span>
+                        </a>
+                      )}
                       <a 
-                        href={`https://api.whatsapp.com/send?phone=${process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '593983476198'}&text=Hola,%20deseo%20adquirir%20la%20Licencia%20Enterprise%20de%20ZeroTrust%20Redact%20en%20plan%20${billingCycle === 'annual' ? 'Anual%20($215.90/año%20con%2010%%20de%20descuento)' : 'Mensual%20($19.99/mes)'}%20para%20mi%20firma%20y%20firmar%20el%20DPA.`} 
+                        href={`https://api.whatsapp.com/send?phone=${process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '593983476198'}&text=Hola,%20deseo%20adquirir%20la%20Licencia%20Anual%20de%20ZeroTrust%20Redact%20($299)%20para%20mi%20firma%20y%20firmar%20el%20DPA.`} 
                         target="_blank" 
                         rel="noopener noreferrer" 
                         className="w-full bg-[#10B981]/15 hover:bg-[#10B981]/25 text-[#34D399] border border-[#10B981]/30 py-3.5 px-4 rounded-xl font-black transition-all flex justify-center items-center gap-2 shadow-sm no-underline text-sm"
                       >
                         <MessageCircle className="h-5 w-5 text-[#34D399] shrink-0" />
-                        <span>Adquirir {billingCycle === 'annual' ? 'Anualidad ($215.90/año)' : 'Plan Mensual ($19.99/mes)'} por WhatsApp</span>
+                        <span>Adquirir Licencia Anual por WhatsApp ($299/año)</span>
                       </a>
-                      <p className="text-[11px] text-slate-400 text-center mt-2 font-medium">
-                        {billingCycle === 'annual' 
-                          ? '✨ Licencia Anual incluye DPA institucional y soporte prioritario 24/7.'
-                          : 'Cancela en cualquier momento sin penalidad · Facturación B2B inmediata.'}
-                      </p>
+                      <p className="text-[11px] text-slate-500 text-center mt-3 font-bold tracking-wide">Ahorra un 17% con el plan anual · Facturación B2B inmediata.</p>
                     </div>
                   )}
               </div>
