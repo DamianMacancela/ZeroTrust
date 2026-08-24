@@ -17,6 +17,18 @@ import { getSupabaseAdmin } from '@/lib/supabase-admin';
 
 export const runtime = 'nodejs';
 
+// Healthcheck & diagnostic for browser / status check visits
+export async function GET() {
+  const isConfigured = !!process.env.PAYPAL_WEBHOOK_ID;
+  return NextResponse.json({
+    status: 'active',
+    endpoint: 'PayPal Webhook Handler',
+    ready: isConfigured,
+    message: 'Este endpoint está activo y escucha peticiones POST enviadas por PayPal.',
+    timestamp: new Date().toISOString()
+  });
+}
+
 function log(level: 'INFO' | 'WARN' | 'ERROR', event: string, meta: Record<string, unknown>) {
   const entry = { timestamp: new Date().toISOString(), level, service: 'paypal-webhook', event, ...meta };
   if (level === 'ERROR') console.error(JSON.stringify(entry));
